@@ -5,7 +5,7 @@ const countDownDate = new Date(2025, 3, 20, 0, 0, 0).getTime();
 
 // Fechas configurables manualmente
 const startDate = new Date(2024, 3, 3, 17, 32, 0);  // Fecha y hora inicial
-const endDate = new Date(2024, 3, 4, -5, -31, -14);     // Fecha y hora final
+const endDate = new Date(2024, 3, 4, -5, -35, -14);     // Fecha y hora final
 let elapsedTime = 0;
 
 const countdownFunction = setInterval(function() {
