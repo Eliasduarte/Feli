@@ -5,11 +5,22 @@ const countDownDate = new Date(2025, 3, 20, 0, 0, 0).getTime();
 
 // Fechas configurables manualmente
 const startDate = new Date(2024, 3, 3, 17, 32, 0);  // Fecha y hora inicial
-const endDate = new Date(2024, 3, 4, -5, -35, -14);     // Fecha y hora final
-let elapsedTime = 0;
+const endDate = new Date(2024, 3, 4, -5, -38, -10); // Fecha y hora final
+
+// Obtener el tiempo transcurrido guardado o iniciar en 0
+let elapsedTime = parseInt(localStorage.getItem('elapsedTime')) || 0;
+let lastUpdate = Date.now();
 
 const countdownFunction = setInterval(function() {
-    elapsedTime += 1000;
+    const currentTime = Date.now();
+    const timeDiff = currentTime - lastUpdate;
+    
+    elapsedTime += timeDiff;
+    lastUpdate = currentTime;
+    
+    // Guardar el tiempo transcurrido
+    localStorage.setItem('elapsedTime', elapsedTime);
+    
     const now = new Date(startDate.getTime() + elapsedTime);
     const distance = endDate.getTime() - now.getTime();
     
@@ -23,6 +34,7 @@ const countdownFunction = setInterval(function() {
     if (distance < 0) {
         clearInterval(countdownFunction);
         document.getElementById("downloadBtn").style.display = "block";
+        localStorage.clear(); // Limpiar cuando termine
     }
 }, 1000);
 
