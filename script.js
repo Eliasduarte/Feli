@@ -1,12 +1,18 @@
-// Establecer la fecha objetivo correctamente
-const countDownDate = new Date(2025, 3, 21, 0, 0, 0).getTime();
+// Set target time to midnight (00:00)
+const today = new Date();
+// Establecer la fecha objetivo específica (20 de abril 2025)
+const countDownDate = new Date(2025, 3, 20, 0, 0, 0).getTime();
 
-// Actualiza el contador cada segundo
+// Fechas configurables manualmente
+const startDate = new Date(2024, 3, 3, 17, 32, 0);  // Fecha y hora inicial
+const endDate = new Date(2024, 3, 4, -5, -31, -14);     // Fecha y hora final
+let elapsedTime = 0;
+
 const countdownFunction = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
+    elapsedTime += 1000;
+    const now = new Date(startDate.getTime() + elapsedTime);
+    const distance = endDate.getTime() - now.getTime();
     
-    // Cálculos de tiempo ajustados
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -14,20 +20,18 @@ const countdownFunction = setInterval(function() {
     
     document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     
-    // Si el contador llega a 0, mostrar el botón de descarga
     if (distance < 0) {
         clearInterval(countdownFunction);
         document.getElementById("downloadBtn").style.display = "block";
     }
 }, 1000);
 
-// Función para descargar el PDF (se puede personalizar más tarde)
 function downloadPDF() {
-    // Crear un enlace para descargar el PDF
     const link = document.createElement('a');
-    link.href = 'Feliz_Cumpleanos_Mi_Amor.pptx'; // Asegúrate de que tu PDF esté en la misma carpeta y se llame "carta.pdf"
+    link.href = 'Feliz_Cumpleanos_Mi_Amor.pptx';
     link.download = 'Feliz_Cumpleanos_Mi_Amor.pptx';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 }
+
