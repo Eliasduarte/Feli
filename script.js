@@ -1,4 +1,5 @@
-
+// Mostrar el botón de descarga inmediatamente
+document.getElementById("downloadBtn").style.display = "block";
 
 function downloadPDF() {
     const link = document.createElement('a');
@@ -8,4 +9,3 @@ function downloadPDF() {
     link.click();
     document.body.removeChild(link);
 }
-
